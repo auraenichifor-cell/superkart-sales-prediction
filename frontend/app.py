@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 import requests
 
-# Base URL of the Flask backend
+
 BACKEND_URL = "http://backend:7860"
 
 # Page title
