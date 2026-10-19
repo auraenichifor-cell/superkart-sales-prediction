@@ -1,9 +1,9 @@
 
 
 import numpy as np
-import joblib  
-import pandas as pd  
-from flask import Flask, request, jsonify  
+import joblib
+import pandas as pd
+from flask import Flask, request, jsonify
 
 
 superkart_api = Flask("SuperKart")
@@ -17,7 +17,7 @@ def home():
 
 @superkart_api.post('/v1/predict')
 def predict_sales():
-   
+
     data = request.get_json()
 
     sample = {
@@ -42,16 +42,16 @@ def predict_sales():
 
 @superkart_api.post('/v1/predictbatch')
 def predict_sales_batch():
-  
+
     file = request.files['file']
 
-  
+
     input_data = pd.read_csv(file)
 
 
     predictions = model.predict(input_data).tolist()
 
-   
+
     output_dict = {str(i): round(pred, 2) for i, pred in enumerate(predictions)}
 
     return output_dict
