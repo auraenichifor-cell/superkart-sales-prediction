@@ -6,13 +6,12 @@ import requests
 
 BACKEND_URL = "http://backend:7860"
 
-# Page title
+
 st.title("SuperKart System")
 st.write(
     "Enter the product and store details below to predict the total sales."
 )
 
-# Input fields for product and store data
 Product_Weight = st.number_input("Product Weight", min_value=0.0, value=12.66)
 Product_Sugar_Content = st.selectbox("Product Sugar Content", ["Low Sugar", "Regular", "No Sugar"])
 Product_Allocated_Area = st.number_input("Product Allocated Area", min_value=0.0, value=0.027)
@@ -24,7 +23,7 @@ Product_Id_char = st.selectbox("Product ID Character", ["FD", "DR", "NC"])
 Store_Age_Years = st.number_input("Store Age (Years)", min_value=0, value=16)
 Product_Type_Category = st.selectbox("Product Type Category", ["Perishables", "Non Perishables"])
 
-# Create JSON payload
+
 product_data = {
     "Product_Weight": Product_Weight,
     "Product_Sugar_Content": Product_Sugar_Content,
@@ -38,7 +37,7 @@ product_data = {
     "Product_Type_Category": Product_Type_Category
 }
 
-# Single Prediction
+
 if st.button("Predict", type='primary'):
 
     response = requests.post(
@@ -53,7 +52,7 @@ if st.button("Predict", type='primary'):
     else:
         st.error("Unable to connect to the prediction API.")
 
-# Batch Prediction
+
 st.subheader("Batch Prediction")
 
 uploaded_file = st.file_uploader(
@@ -79,7 +78,7 @@ if uploaded_file is not None:
                 if isinstance(results, list):
                     df = pd.DataFrame(results)
                 elif isinstance(results, dict):
-                    # Check if all values are scalars
+                    
                     if all(not isinstance(v, (list, dict)) for v in results.values()):
                         df = pd.DataFrame([results])
                     else:
