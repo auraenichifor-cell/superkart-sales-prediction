@@ -78,7 +78,7 @@ if uploaded_file is not None:
                 if isinstance(results, list):
                     df = pd.DataFrame(results)
                 elif isinstance(results, dict):
-                    
+
                     if all(not isinstance(v, (list, dict)) for v in results.values()):
                         df = pd.DataFrame([results])
                     else:
